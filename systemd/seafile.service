@@ -1,0 +1,14 @@
+[Unit]
+Description=Start Seafile
+After=network.target mysql.service
+
+[Service]
+type=oneshot
+ExecStart=/home/seafile/haiwen/seafile-server-latest/seafile.sh start
+ExecStop=/home/seafile/haiwen/seafile-server-latest/seafile.sh stop
+RemainAfterExit=yes
+User=seafile
+Group=seafile
+
+[Install]
+WantedBy=multi-user.target

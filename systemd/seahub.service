@@ -1,0 +1,14 @@
+[Unit]
+Description=Seafile hub
+After=network.target seafile.service
+
+[Service]
+Type=oneshot
+ExecStart=/home/seafile/haiwen/seafile-server-latest/seahub.sh start-fastcgi
+ExecStop=/home/seafile/haiwen/seafile-server-latest/seahub.sh stop
+User=seafile
+Group=seafile
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
