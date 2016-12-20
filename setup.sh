@@ -17,51 +17,32 @@ function help {
   	-h, --help		prints this
   	-i, --install		installs files
 	-r, --remove		uninstalls files
+
 "
 }
 
 function remove {
-	printf "touch temporary file to gain sudo priviliges.. "
-	sudo touch .tmp
-	printf "done\n"
-
-	printf "disabling seafile.service and seahub.service.. "
 	sudo systemctl disable seafile.service
 	sudo systemctl disable seahub.service
-	printf "done\n"
 
-	printf "removing /etc/systemd/system/seafile.service and /etc/systemd/system/seahub.service.. "
-	sudo rm /etc/systemd/system/seafile.service
-	sudo rm /etc/systemd/system/seahub.service
-	printf "done\n"
-
-	printf "removing temporary file.. "
-	rm .tmp -f
-	printf "done\n"
-
+	sudo rm /etc/systemd/system/seafile.service -v
+	sudo rm /etc/systemd/system/seahub.service -v
 }
 
 
 function install {
 	
-	printf "touch temporary file to gain sudo priviliges.. "
-	sudo touch .tmp
-	printf "done\n"
-	
-	printf "copying systemd/* to /etc/systemd/system/.. "
-	sudo cp systemd/* /etc/systemd/system/
-	printf "done\n"
+	sudo cp systemd/* /etc/systemd/system/ -v
 
-	printf "enabling seafile.service and seahub.service.. "
 	sudo systemctl enable seafile.service
 	sudo systemctl enable seahub.service
-	printf "done\n"
 	
-	printf "removing temporary file.. "
-	rm .tmp -f
-	printf "done\n"
-
 }
+
+if ! [ $(id -u) = 0 ]; then
+	printf "Please run this script as root.\n"
+	exit
+fi
 
 case $1 in
 	--help|-h )
