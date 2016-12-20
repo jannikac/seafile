@@ -22,20 +22,20 @@ function help {
 }
 
 function remove {
-	sudo systemctl disable seafile.service
-	sudo systemctl disable seahub.service
+	systemctl disable seafile.service
+	systemctl disable seahub.service
 
-	sudo rm /etc/systemd/system/seafile.service -v
-	sudo rm /etc/systemd/system/seahub.service -v
+	rm /etc/systemd/system/seafile.service -v
+	rm /etc/systemd/system/seahub.service -v
 }
 
 
 function install {
 	
-	sudo cp systemd/* /etc/systemd/system/ -v
+	cp systemd/* /etc/systemd/system/ -v
 
-	sudo systemctl enable seafile.service
-	sudo systemctl enable seahub.service
+	systemctl enable seafile.service
+	systemctl enable seahub.service
 	
 }
 
